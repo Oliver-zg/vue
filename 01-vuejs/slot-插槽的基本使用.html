@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn><button>hh</button></cpn>
+  <cpn><i>oo</i></cpn>
+  <cpn></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <h2>hhhhh</h2>
+    <slot><button>默认按钮</button></slot>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app', //用于挂载要管理的元素
+    data: {
+      message: '你好啊！'
+    },
+    components:{
+      cpn:{
+        template:'#cpn'
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--3.使用组件-->
+ <!-- <my-cpn></my-cpn>
+  <my-cp></my-cp>-->
+  <cpn2></cpn2>
+  <!--<cpn></cpn>-->
+  <cpn3></cpn3>
+  <cpn4></cpn4>
+  <cpn5></cpn5>
+  <cpn6></cpn6>
+</div>
+<!--组件模板抽离-->
+<!--1、script标签-->
+<script type="text/x-template" id="src-cpn">
+  <div>
+    <h2>1、script标签</h2>
+    <p>我是内容</p>
+  </div>
+</script>
+<!--2、template标签-->
+<template id="tem-cpn">
+  <div>
+    <h2>2、template标签</h2>
+    <p>我是内容</p>
+  </div>
+</template>
+<template id="tem1-cpn">
+  <div>
+    <h2>{{title}}</h2>
+    <p>我是内容</p>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  //1.创建组件构造器（子组件）
+  const cpnC = Vue.extend({
+    //自定义模板
+    template:`
+    <div>
+      <h2>我是标题</h2>
+      <p>我是内容</p>
+    </div>
+    `
+  });
+  //第二个组件构造器（父组件）
+  const cpnC2 = Vue.extend({
+    template:`
+    <div>
+      <h2>我是标题2</h2>
+      <p>我是内容</p>
+      <cpn></cpn>
+    </div>
+    `,
+    components:{
+      cpn:cpnC //子组件
+    }
+  });
+  //2.注册组件 全局组件
+ /* Vue.component('my-cpn',cpnC)*/
+
+  //组件的语法糖注册方式
+  Vue.component('cpn3',{
+    template:`
+      <div>
+        <h2>全局组件语法糖</h2>
+        <p>我是内容</p>
+        <cpn></cpn>
+      </div>
+    `
+  });
+
+  Vue.component('cpn6',{
+    template:'#tem1-cpn',
+    data() {
+      return {
+        title:'abc'
+      }
+    }
+  });
+
+  //root组件
+  const app = new Vue({
+    el: '#app', //用于挂载要管理的元素
+    data: {
+      message: '你好啊！'
+    },
+    components:{
+      /*'my-cp':cpnC,*/
+      'cpn2':cpnC2,
+      'cpn4':{
+        template:`
+        <div>
+          <h2>局部组件语法糖</h2>
+          <p>我是内容</p>
+          <cpn></cpn>
+        </div>
+        `
+      },
+      'cpn5':{
+        template:'#src-cpn'
+      }
+
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--父组件模板-->
+<div id="app">
+  <!--监听子组件事件-->
+  <cpn @item-click="cpnClick"></cpn>
+</div>
+<!--子组件模板-->
+<template id="cpn">
+  <div>
+    <button v-for="items in categories" @click="btnClick(items)">{{items.name}}</button>
+  </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+  //子传父 props
+  //子组件
+  const cpn  = {
+    template:'#cpn',
+    data(){
+      return {
+        categories:[
+          {id:'aaa',name:'热门推荐'},
+          {id:'bbb',name:'手机数码'},
+          {id:'ccc',name:'家用家电'},
+          {id:'ddd',name:'电脑办公'},
+        ]
+
+      }
+
+    },
+    methods:{
+      btnClick(items){
+        //向父组件传递消息
+        this.$emit('item-click',items);
+      }
+    }
+  }
+  //父组件
+  const app = new Vue({
+    el: '#app', //用于挂载要管理的元素
+    data: {
+      message: '你好啊！',
+      movies:['海王','海贼王']
+    },
+    components:{
+      'cpn':cpn
+    },
+    methods: {
+      cpnClick(items){
+        console.log(items.id);
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <ul>
+    <li v-for="(value,key) in message">{{value}}-{{key}}</li>
+  </ul>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app', //用于挂载要管理的元素
+    data: {
+      message: {
+        name:'zg',
+        age:'18',
+        height:'1.88'
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn :c_movies="movies"></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <!--<p>{{cmovies}}</p>-->
+    <ul>
+      <li v-for="items in c_movies">{{items}}</li>
+    </ul>
+    <p>{{cmessage}}</p>
+  </div>
+
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  //父传子 props
+  const cpn  = {
+    template:'#cpn',
+    /*props:['cmovies','cmessage'],*/
+    props:{
+      //类型限制 可以自定义类型
+      //cmovies:Array,
+      //cmessage:String
+      //提供一些默认值
+      cmessage:{
+        type:String,
+        default:'aaaa',
+        required:'true' //必须传值
+      },
+      //类型是对象或者数组时，默认值必须是函数
+      c_movies:{
+        type: Array,
+        default(){
+          return ['nihao'];
+        }
+      }
+    },
+    data(){
+      return {
+
+      }
+
+    }
+  }
+  const app = new Vue({
+    el: '#app', //用于挂载要管理的元素
+    data: {
+      message: '你好啊！',
+      movies:['海王','海贼王']
+    },
+    components:{
+      'cpn':cpn
+    }
+  })
+</script>
+</body>
+</html>

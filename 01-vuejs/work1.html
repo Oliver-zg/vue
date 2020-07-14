@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body {
+      cursor: pointer;
+    }
+    .active {
+      color: blueviolet;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <ul>
+    <li v-for="(m,index) in movies" :class="{active:index==isActive}" @click = "doActive(index)">{{m}}</li>
+  </ul>
+  <h2 :style="{color:'#FFFFF'}" >xx</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+  const app = new Vue({
+    el: '#app', //用于挂载要管理的元素
+    data: {
+      movies:['海王','少年的你','火影忍者'],
+      isActive: 0,
+      baseStyle:{color:'red'}
+    },
+    methods:{
+          doActive :function (index) {
+            console.log(index);
+            this.isActive = index;
+      }
+    }
+
+  })
+</script>
+</body>
+</html>

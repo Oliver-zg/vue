@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<cpn :cnum1="num1" :cnum2="num2" @change-value-1="cpn1Change" @change-value-2="cpn2Change"></cpn>
+</div>
+<template id="cpn">
+  <div>
+    props:{{cnum1}}
+    data:{{dnum1}}
+    <input type="text" v-model="dnum1" @keydown="changeValue1(dnum1)">
+    <!--<input type="text"  :value="dnum1" @input="changeValue1">-->
+  </br>
+    props:{{cnum2}}
+    data:{{dnum2}}
+    <input type="text" v-model="dnum2" @keydown="changeValue2(dnum2)">
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app', //用于挂载要管理的元素
+    data: {
+      num1:1,
+      num2:2
+    },
+    components:{
+      cpn:{
+        template:'#cpn',
+        props:['cnum1','cnum2'],
+        data(){
+          return{
+            dnum1:this.cnum1,
+            dnum2:this.cnum2
+          }
+        },
+        methods:{
+          //子回传父
+          changeValue1(a){
+            a=a*100;
+            this.$emit('change-value-1',a);
+          },
+          changeValue2(a){
+            this.$emit('change-value-2',a);
+          }
+        }
+    }
+  },
+    methods: {
+      //接收子组件传来的值
+      cpn1Change(a){
+        this.num1=a;
+      },
+      cpn2Change(a){
+        this.num2=a;
+        console.log(this.num2);
+      }
+
+    }
+  })
+</script>
+</body>
+</html>

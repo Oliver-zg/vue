@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>书籍购物车</title>
+</head>
+<style>
+  [v-cloak] {
+    display: none;
+  }
+</style>
+<body>
+<div id="app" v-cloak>
+  <!--<template>-->
+  <div v-if="books.length>0">
+    <table>
+      <thead>
+      <tr>
+        <th></th>
+        <th>书籍名称</th>
+        <th>出版日期</th>
+        <th>价格</th>
+        <th>购买数量</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="items,index in books" >
+        <td>{{items.id}}</td>
+        <td>{{items.name}}</td>
+        <td>{{items.date}}</td>
+        <td>{{items.price | showPrice}}</td>
+        <td><button  @click="decrement(index)" v-bind:disabled="items.count<=1">-</button>{{items.count}}<button @click="increment(index)">+</button></td>
+        <td><button @click="remove(index)">移除</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div v-else>购物车为空</div>
+  <h2>共计：{{totalPrice | showPrice}}</h2>
+  <!--</template>-->
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app', //用于挂载要管理的元素
+    data: {
+      isTrue: true,
+      books:[{
+        id: 1,
+        name:'《算法导论》',
+        date: '2006-9',
+        price: 85.00,
+        count: 1
+      },
+        {
+          id:2,
+          name:'《UNIX编程艺术》',
+          date: '2006-2',
+          price: 59.00,
+          count: 1
+        },
+        {
+          id:3,
+          name:'《编程珠玑》',
+          date: '2008-10',
+          price: 39.00,
+          count: 1
+        },
+        {
+          id:4,
+          name:'《VUE》',
+          date: '2008-10',
+          price: 39.00,
+          count: 1
+        }]
+    },
+    computed:{
+      totalPrice(){
+        let totalPrice = 0;
+        // for (let i=0;i<this.books.length;i++){
+        //   totalPrice +=this.books[i].price*this.books[i].count;
+        // }
+        /*for(let item of this.books){
+          totalPrice += item.price*item.count;
+        }
+        return totalPrice;*/
+        return this.books.reduce(function (preValue,books) {
+          return preValue + books.price * books.count;
+        },0)
+      }
+    },
+    filters: {
+      showPrice(price) {
+        return '￥'+price.toFixed(2);
+      }
+    },
+    methods: {//过滤器
+      increment(index) {
+        return this.books[index].count++;
+      },
+      decrement(index) {
+        return this.books[index].count--;
+
+      },
+      remove(index) {
+        this.books.splice(index,1);
+      }
+    }
+  });
+
+  //高阶函数 filter/map/reduce
+
+  const nums = [10,20,30,40,50];
+  let total = nums.filter(function (n) {
+    return n>10;
+  }).map(function (n) {
+    return n*2;
+  }).reduce(function (prevalue,n) {
+    return prevalue + n;
+  },0);
+  console.log(total);
+
+  //filter
+  let newNums = nums.filter(function (n) {
+    return n>10; //返回true加入结果数组
+  });
+  //map函数
+  let new2Nums = newNums.map(function (n) {
+    return n*2; //返回数据
+  });
+  console.log(new2Nums);
+  //reduce 对数组内容进行汇总
+  let nums3 = new2Nums.reduce(function (prevalue,n) {
+    return prevalue + n; //累加
+  },0);
+  console.log(nums3);
+
+</script>
+</body>
+</html>
