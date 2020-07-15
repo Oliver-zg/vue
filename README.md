@@ -25,7 +25,7 @@ package.json
 ```
 通过 `npm run xxxx` 首先会去找本地对应的命令，没有找到，则会去全局环境变量中找
 e.g `npm run build`  去package.json中的scripts里找build对应的命令，找到了，是webpcak，则会执行webpack
-#### 2.loader 打包除js之外的其他资源
+### 2.loader 打包除js之外的其他资源
 1、通过npm安装loader
 例如：打包css
 ```powershell
@@ -61,8 +61,8 @@ module.exports = {
   }
 }
 ```
-#### 3.处理less文件
-#### 4.处理图片
+### 3.处理less文件
+### 4.处理图片
 安装：
 
 ```powershell
@@ -107,7 +107,7 @@ module.exports = {
         ]
       }]}}
 ```
-##### 5.配置vue
+### 5.配置vue
 
 ```powershell
 npm install vue --save
