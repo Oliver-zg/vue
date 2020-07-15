@@ -16,10 +16,23 @@ require('./css/normal.css')
 require('./css/special.less')
 
 import Vue from 'vue'
+//import App from './vue/app'
+import App from './vue/App.vue'
 
-const app = new Vue({
+new Vue ({
+  el:'#app',
+  template:'<App/>',
+  components:{
+    App
+  }
+
+})
+/* new Vue({
   el: '#app',
+  template:`
+  <h2>{{message}}</h2>
+ `,
   data:{
     message: 'Hello Webpack'
   }
-})
+}) */

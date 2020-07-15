@@ -1,10 +1,12 @@
 const path = require('path') //用npm init初始化得到path 依赖node包
+
 module.exports = {
   entry:'./src/main.js',
   output:{
     path: path.resolve(__dirname,'dist'), //__dirname: node 的全局变量
     filename:'bundle.js',
-    publicPath:'dist/' //在url前面加上此路径
+    publicPath:'dist/', //在url前面加上此路径
+   
   },
   module: {
     rules:[
@@ -33,6 +35,9 @@ module.exports = {
             }
           }
         ]
+      },{
+        test:/\.vue$/,
+        use:['vue-loader']
       }
     ]
   },
