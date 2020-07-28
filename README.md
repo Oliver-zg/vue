@@ -125,5 +125,43 @@ resolve:{
 	'vue$':'vue/dist/vue.esm.js'  //指定使用的版本
 	}
 }
+```
+### plugin的使用
+- 打包HTML的plugin
+  - 安装
+  
+    ```npm install html-webpack-plugin --save-dev``` 
+  - 配置 在webpack.config.js加上 
+  
+    ```
+    const HtmlWebpackPlugin = require('html-webpack-plugin')
+    ....
+     plugins:[
+      new webpack.BannerPlugin('最终版权'),
+      new HtmlWebpackPlugin()
+      ]
+      ```
+  - 按模板生产dist下面的index.html
+    
+    ```
+    new HtmlWebpackPlugin({
+      template:'index.html'
+    })
+    ```
+- 压缩js的plugin
+  - 安装
 
+    ```npm install uglifyjs-webpack-plugin@1.1.1 --save-dev```
+### 搭建本地服务器
+- npm install webpack-dev-server@2.9.1 --save-dev
+- 配置 devServer
 
+  webpack.config.js
+  ```
+  .....
+  devServer:{
+    contentBase:'./dist', 
+    inline:true
+  }
+  ```
+### webpack配置文件的分离

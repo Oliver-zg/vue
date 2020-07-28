@@ -1,6 +1,7 @@
 <template>
   <div class="title">
-    <h2>{{message}}</h2>
+    <h2>111{{message}}</h2>
+    <Cpn/>
   </div>
 </template>
 
