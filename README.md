@@ -165,3 +165,4 @@ resolve:{
   }
   ```
 ### webpack配置文件的分离
+创建 prod.config.js  dev.config.js
