@@ -338,7 +338,27 @@ request({
 
 **拦截器**
 
+```js
+//请求拦截
+instance.interceptors.request.use(config => {
+    console.log(config)
+    return config
+  },err => {
+    console.log(err)
+  })
+//相应拦截
+instance.interceptors.response.use(res => {
+    
+},err => {
+    
+})
+```
 
+拦截器使用场景：
+
+1. config中的一些信息不符合服务器要求，要修改
+2. 每次发送网络请求时，都希望在界面中显示一个请求的图标
+3. 某些网络请求（比如登录 ），必须携带一些特殊的信息
 
 #### 补充
 
