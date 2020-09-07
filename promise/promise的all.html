@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise基本使用</title>
+</head>
+<body>
+  
+</body>
+<script>
+
+  Promise.all(
+    [
+      new Promise((reslove,reject) => {
+        setTimeout(() => {
+          reslove('1')
+        },2000)
+      }),
+      new Promise((reslove,reject) => {
+        setTimeout(() => {
+          reslove('2')
+        },1000)
+      })
+    ]
+  ).then(arr => {
+    console.log(arr)
+  })
+  const shareObj = {
+    name: 'zg'
+  }
+  Vue.prototype.shareObj = shareObj
+  Vue.component('cpn1',{
+    
+  })
+  Vue.component('cpn2',{
+    
+  })
+</script>
+</html>
